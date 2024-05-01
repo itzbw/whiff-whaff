@@ -41,20 +41,45 @@ window.addEventListener("keydown", changeDirection);
 resetButton?.addEventListener("click", resetGame);
 
 gameStart();
+drawPaddle();
 
-function gameStart() { };
-
-function drawPaddle() {
-    ctx.strokeStyle = paddleBorder
+function gameStart() {
+    createBall();
+    nextTick();
 };
 
-function nextTick() { };
-function clearBoard() { };
+function drawPaddle() {
+    ctx.strokeStyle = paddleBorder;
+    ctx.fillStyle = paddle1Color;
+    ctx.fillRect(paddle1.x, paddle1.y, paddle1.width, paddle1.height);
+    ctx.strokeRect(paddle1.x, paddle1.y, paddle1.width, paddle1.height);
+
+    ctx.fillStyle = paddle2Color;
+    ctx.fillRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
+    ctx.strokeRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
+};
+
+function nextTick() {
+    // A callback is a function passed as an argument to another function
+    intervalID = setTimeout(() => {
+        clearBoard();
+        drawPaddle();
+        moveBall();
+        drawBall(ballX, ballY);
+        checkCollision();
+        nextTick(); // for another round
+    }, 10)
+
+};
+function clearBoard() {
+    ctx.fillStyle = boardBackground;
+    ctx.fillRect(0, 0, gameWidth, gameHeight);
+};
 
 
 function createBall() { };
 function moveBall() { };
-function drawBall() { };
+function drawBall(ballX, ballY) { };
 function checkCollision() { };
 function changeDirection() { };
 function updateScore() { };
