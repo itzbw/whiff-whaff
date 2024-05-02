@@ -15,6 +15,7 @@ const ballBorderColor = "black";
 const ballRadius = 12.5;
 const paddleSpeed = 50;
 
+var winner = false;
 let intervalID;
 let ballSpeed = 1;
 let ballX = gameWidth / 2;
@@ -185,8 +186,29 @@ function changeDirection(event) {
 };
 function updateScore() {
     scoreText.textContent = `${player1Score} : ${player2Score}`;
+
+    winning();
 };
+
+function winning() {
+    if (player1Score == 2) {
+        winner = true;
+        console.log("player 1 WON");
+        resetGame();
+    }
+
+    if (player2Score == 2) {
+        winner = true;
+        console.log("player 2 WON");
+        resetGame();
+    }
+
+}
+
+
+
 function resetGame() {
+
     player1Score = 0;
     player2Score = 0;
 
@@ -214,8 +236,10 @@ function resetGame() {
     clearInterval(intervalID);
     gameStart();
 
-
-
 };
+
+
+
+
 
 
