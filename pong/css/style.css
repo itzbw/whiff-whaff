@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(168, 224, 247);
+    background-color: rgb(0, 0, 0);
 }
 
 .footer {
@@ -29,7 +29,7 @@ body {
     display: block;
     width: 100vw;
     min-height: 100vh;
-    font-family: 'Comic Sans MS';
+    font-family: 'Impact';
 }
 
 .dashboard {
@@ -74,6 +74,7 @@ body {
 
 .main-dashboard #title {
     padding-top: 50px;
+    color: aliceblue;
 }
 
 .main-dashboard ul li {
@@ -85,6 +86,8 @@ body {
     display: inline-block;
     border: solid 2px;
 }
+
+
 
 .setting-container {
     width: 100%;
@@ -100,6 +103,7 @@ body {
 
 .settings #title {
     padding-top: 50px;
+
 }
 
 
