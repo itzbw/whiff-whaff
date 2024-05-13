@@ -29,7 +29,7 @@ body {
     display: block;
     width: 100vw;
     min-height: 100vh;
-    font-family: 'Impact';
+    font-family: 'Courier';
 }
 
 .dashboard {
@@ -74,7 +74,16 @@ body {
 
 .main-dashboard #title {
     padding-top: 50px;
-    color: aliceblue;
+    color: #ffffff;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 151px #0fa;
 }
 
 .main-dashboard ul li {
@@ -92,6 +101,7 @@ body {
 .setting-container {
     width: 100%;
     display: none;
+    color: rgb(239, 82, 208);
 }
 
 .settings {
@@ -166,7 +176,8 @@ body {
 
 .settings table input {
     border: 0px;
-    background: none
+    background: none;
+    color: antiquewhite
 }
 
 .ping-pong-container {
