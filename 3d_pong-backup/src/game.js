@@ -556,7 +556,7 @@ function paddlePhysics() {
                                 onCollide()
 
                                 // stretch the paddle to indicate a hit
-                                paddle1.scale.y = 15;
+                                //paddle1.scale.y = 15;
                                 // switch direction of ball travel to create bounce
                                 ballDirX = -ballDirX;
                                 // we impact ball angle when hitting it
@@ -582,7 +582,7 @@ function paddlePhysics() {
                                 onCollide()
 
                                 // stretch the paddle to indicate a hit
-                                paddle2.scale.y = 15;
+                                //paddle2.scale.y = 15;
                                 // switch direction of ball travel to create bounce
                                 ballDirX = -ballDirX;
                                 // we impact ball angle when hitting it
