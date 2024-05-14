@@ -1,11 +1,5 @@
 import * as THREE from 'three';
 
-// --------------------------------------------- //
-// ------- 3D PONG built with Three.JS --------- //
-// -------- Created by Nikhil Suresh ----------- //
-// -------- Three.JS is by Mr. doob  ----------- //
-// --------------------------------------------- //
-
 // ------------------------------------- //
 // ------- GLOBAL VARIABLES ------------ //
 // ------------------------------------- //
@@ -23,11 +17,12 @@ var paddle1DirY = 0, paddle2DirY = 0, paddleSpeed = 3;
 // ball variables
 var ball, paddle1, paddle2;
 var ballDirX = 1, ballDirY = 1, ballSpeed = 2;
+var ballRotationSpd = { x: 0.2, y: 0, z: 0 }
 
 // game-related variables
 var score1 = 0, score2 = 0;
 // you can change this to any positive whole number
-var maxScore = 7;
+var maxScore = 5;
 
 // set opponent reflexes (0 - easiest, 1 - hardest)
 var difficulty = 0.2;
@@ -90,7 +85,7 @@ function createScene() {
         var VIEW_ANGLE = 50,
                 ASPECT = WIDTH / HEIGHT,
                 NEAR = 0.1,
-                FAR = 10000;
+                FAR = 1000;
 
         var c = document.getElementById("gameCanvas");
 
@@ -130,38 +125,45 @@ function createScene() {
         var paddle1Material =
                 new THREE.MeshLambertMaterial(
                         {
-                                color: 0x1B32C0
+                                color: 0xffffff
                         });
+
+
         // create the paddle2's material
         var paddle2Material =
                 new THREE.MeshLambertMaterial(
                         {
                                 color: 0xFF4045
                         });
-        // create the plane's material	
+        // create the table's material	
         var planeMaterial =
                 new THREE.MeshLambertMaterial(
                         {
-                                color: 0x4BD121
+                                //color: 0x4BD121
+                                map: new THREE.TextureLoader().load('./assets/neon_gradient.png')
                         });
-        // create the table's material
+        // create the plane's material
         var tableMaterial =
                 new THREE.MeshLambertMaterial(
                         {
                                 color: 0x111111
+
                         });
         // create the pillar's material
-        var pillarMaterial =
-                new THREE.MeshLambertMaterial(
-                        {
-                                color: 0x534d0d
-                        });
+        // var pillarMaterial =
+        //         new THREE.MeshLambertMaterial(
+        //                 {
+        //                         color: 0x534d0d
+        //                 });
         // create the ground's material
         var groundMaterial =
                 new THREE.MeshLambertMaterial(
                         {
-                                color: 0x888888
+                                //color: 0x888888,
+                                transparent: true,
+                                opacity: 0
                         });
+
 
 
         // create the playing surface plane
@@ -195,15 +197,15 @@ function createScene() {
 
         // // set up the sphere vars
         // lower 'segment' and 'ring' values will increase performance
-        var radius = 5,
-                segments = 6,
-                rings = 6;
+        var radius = 10,
+                segments = 32,
+                rings = 16;
 
         // // create the sphere's material
         var sphereMaterial =
-                new THREE.MeshLambertMaterial(
+                new THREE.MeshBasicMaterial(
                         {
-                                color: 0xD43001
+                                map: new THREE.TextureLoader().load('./assets/moon.jpg')
                         });
 
         // Create a ball with sphere geometry
@@ -219,7 +221,7 @@ function createScene() {
         // // add the sphere to the scene
         scene.add(ball);
 
-        ball.position.x = 0;
+        ball.position.x = 0; // todo: self rotation
         ball.position.y = 0;
         // set ball above the table surface
         ball.position.z = radius;
@@ -244,7 +246,9 @@ function createScene() {
 
                 paddle1Material);
 
-        // // add the sphere to the scene
+        // add the paddle to the scene
+
+
         scene.add(paddle1);
         paddle1.receiveShadow = true;
         paddle1.castShadow = true;
@@ -350,13 +354,13 @@ function createScene() {
         // add to the scene
         scene.add(pointLight);
 
-        ambiLight = new THREE.AmbientLight(0xffff00, 4);
+        ambiLight = new THREE.AmbientLight(0xffffff, 4);
         scene.add(ambiLight);
 
 
         // add a spot light
         // this is important for casting shadows
-        spotLight = new THREE.SpotLight(0xF8D898);
+        spotLight = new THREE.SpotLight(0xffffff);
         spotLight.position.set(0, 0, 460);
         spotLight.intensity = 1.5;
         spotLight.castShadow = true;
@@ -514,10 +518,29 @@ function cameraPhysics() {
         camera.rotation.x = -0.01 * (ball.position.y) * Math.PI / 180;
         camera.rotation.y = -60 * Math.PI / 180;
         camera.rotation.z = -90 * Math.PI / 180;
+
+        ball.rotation.x += ballRotationSpd.x;
+        ball.rotation.y += ballRotationSpd.y;
+        ball.rotation.z += ballRotationSpd.z;
 }
 
 // Handles paddle collision logic
 function paddlePhysics() {
+        const onCollide = () => {
+                if (ballRotationSpd.x) {
+                        ballRotationSpd.y = ballRotationSpd.x;
+                        ballRotationSpd.x = 0;
+                } else if (ballRotationSpd.y) {
+                        ballRotationSpd.z = ballRotationSpd.y;
+                        ballRotationSpd.y = 0;
+                } else if (ballRotationSpd.z) {
+                        ballRotationSpd.x = ballRotationSpd.z;
+                        ballRotationSpd.z = 0;
+                }
+
+                ballSpeed += 0.3;
+        }
+
         // PLAYER PADDLE LOGIC
 
         // if ball is aligned with paddle1 on x plane
@@ -530,6 +553,8 @@ function paddlePhysics() {
                         && ball.position.y >= paddle1.position.y - paddleHeight / 2) {
                         // and if ball is travelling towards player (-ve direction)
                         if (ballDirX < 0) {
+                                onCollide()
+
                                 // stretch the paddle to indicate a hit
                                 paddle1.scale.y = 15;
                                 // switch direction of ball travel to create bounce
@@ -554,6 +579,8 @@ function paddlePhysics() {
                         && ball.position.y >= paddle2.position.y - paddleHeight / 2) {
                         // and if ball is travelling towards opponent (+ve direction)
                         if (ballDirX > 0) {
+                                onCollide()
+
                                 // stretch the paddle to indicate a hit
                                 paddle2.scale.y = 15;
                                 // switch direction of ball travel to create bounce
@@ -586,9 +613,9 @@ function resetBall(loser) {
 }
 
 var bounceTime = 0;
-// checks if either player or opponent has reached 7 points
+// checks if either player or opponent has reached 5 points
 function matchScoreCheck() {
-        // if player has 7 points
+        // if player has 5 points
         if (score1 >= maxScore) {
                 // stop the ball
                 ballSpeed = 0;
@@ -602,7 +629,7 @@ function matchScoreCheck() {
                 paddle1.scale.z = 2 + Math.abs(Math.sin(bounceTime * 0.1)) * 10;
                 paddle1.scale.y = 2 + Math.abs(Math.sin(bounceTime * 0.05)) * 10;
         }
-        // else if opponent has 7 points
+        // else if opponent has 5 points
         else if (score2 >= maxScore) {
                 // stop the ball
                 ballSpeed = 0;

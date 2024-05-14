@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-		<title>Game</title>
+		<title>3D PONG</title>
 
 		
 		<style>
@@ -24,10 +24,19 @@
 			}
 			
 			#scores {
-				font-size: 600%;
+				font-size: 300%;
 				padding: 0;
 				margin: 0;
 				color: white;
+				text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa,
+    0 0 82px #0fa,
+    0 0 92px #0fa,
+    0 0 102px #0fa,
+    0 0 110px #0fa;
 			}
 			
 			#title {
@@ -49,15 +58,18 @@
 
 	</head>
 	<body>
+		<div id='scoreboard'>
+			<h1 id='title'>3D PONG</h1>
+			<h2 id='winnerBoard'>First to 5 wins!</h2>
+			<h3>A - move left | D - move right</h3>
+			<h1 id='scores'>0-0</h1>
+			<br>
+			<br>
+		</div>
+
 		<div id='gameCanvas'>
         <script src="./src/game.js" type="module"></script>
 			</div>
-		<div id='scoreboard'>
-			<h1 id='scores'>0-0</h1>
-			<h1 id='title'>3D PONG</h1>
-			<h2 id='winnerBoard'>First to 7 wins!</h2>
-			<h3>A - move left
-			<br>D - move right</h3>
-		</div>
+
 	</body>
 </html>
