@@ -94,6 +94,14 @@ export class Board {
             x.fillStyle = '#1672A7';
             x.fill();
 
+            // grid debugger
+            // x.beginPath();
+            // x.moveTo(this.innerMidLeftBot.x2d, this.innerMidLeftBot.y2d);
+            // x.lineTo(this.innerMidRightTop.x2d, this.innerMidRightTop.y2d);
+            // x.strokeStyle = 'red'; // Temporary guide line color
+            // x.stroke();
+
+
             //Right Side of Board
             x.beginPath();
             x.moveTo(this.innerMidRightTop.x2d, this.innerMidRightTop.y2d);
@@ -187,11 +195,13 @@ export class Board {
     }
 
     drawBoard() {
-        this.drawStands();
-        this.drawNetLower();
+        //this.drawStands();
+        //this.drawNetLower();
         this.drawMainBoard();
         this.drawBlueBoard();
-        this.drawNet();
+        //this.drawNet();
     }
+
+
 
 }

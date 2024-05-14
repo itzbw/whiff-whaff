@@ -1,4 +1,5 @@
-import { TableTennis } from './main.js';
+import { PongPong } from './main.js';
 
-const ttContainer = document.querySelector('.tabletenniscontainer');
-const TT = new TableTennis(ttContainer);
+const ppContainer = document.querySelector('.pongcontainer');
+const TT = new PongPong(ppContainer);
+

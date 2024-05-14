@@ -1,14 +1,15 @@
 import { Game } from "./game.js";
 import { GameLayout } from './constants/gamelayout.js';
 import { PLAYER_PROJECTOR } from "./constants/constants.js";
+import * as THREE from 'three';
 
-export class TableTennis {
+export class PongPong {
     /**
-     * @constructs TableTennis
+     * @constructs PongPong
      * @param Object Container Object for our game
      */
-    constructor(ttContainer) {
-        ttContainer.innerHTML += GameLayout;
+    constructor(ppContainer) {
+        ppContainer.innerHTML += GameLayout;
         this.tempProjX = null;
         this.dashBoardContainer = document.querySelector('.dashboard-container');
         this.dashBoard = document.querySelector('.dashboard');

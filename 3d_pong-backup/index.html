@@ -2,10 +2,13 @@
 <html>
   <head>
 		<title>Game</title>
+
+		
 		<style>
 			body {
 				background-color: black;
 			}
+			
 			#gameCanvas {
 				background-color: black;
 				width: 640px;
@@ -13,28 +16,42 @@
 				margin: auto;
 				align-content: center;
 			}
+			
 			#scoreboard {
 				text-align: center;
 				font-family: Segoe UI, Helvetica, Ubuntu, sans-serif;
 				color: white;
 			}
+			
 			#scores {
-				font-size:600%; 
-				padding:0; 
-				margin:0;
+				font-size: 600%;
+				padding: 0;
+				margin: 0;
 				color: white;
 			}
+			
 			#title {
 				background-color: white;
 				color: black;
 			}
 		</style>
+	
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js",
+					"three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.149.0/examples/jsm/"
+				}
+			}
+		</script>
+
+
 	</head>
-	<body onload='setup();'>
-		<div id='gameCanvas'></div>
-		<script src='./src/three.module.min.js'></script>
-        <script src="./src/keyboard.js" type="module"></script>
-        <script src="./src/main.js" type="module"></script>
+	<body>
+		<div id='gameCanvas'>
+        <script src="./src/game.js" type="module"></script>
+			</div>
 		<div id='scoreboard'>
 			<h1 id='scores'>0-0</h1>
 			<h1 id='title'>3D PONG</h1>
