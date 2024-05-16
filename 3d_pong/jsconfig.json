@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "target": "ES6",
+    "rootDir": "src",
+    "outDir": "lib",
+    "moduleResolution": "node",
+    // "types": [
+    //   "node"
+    // ]
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ],
+  "include": [
+    "./src"
+  ]
+}
