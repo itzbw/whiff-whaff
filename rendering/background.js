@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-let scene, camera, cloudParticles = [], composer;
+let scene, camera, renderer;
 
 
 function init() {
@@ -98,7 +98,7 @@ function render() {
   // cloudParticles.forEach(p => {
   //   p.rotation.z -= 0.001;
   // });
-  composer.render(scene, camera);
+  renderer.render(scene, camera);
   requestAnimationFrame(render);
 }
 init();
