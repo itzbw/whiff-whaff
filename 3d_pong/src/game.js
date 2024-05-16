@@ -64,7 +64,7 @@ var Key = {
 // ------------------------------------- //
 
 
-function setup() {
+function setupVsHuman() {
         // update the board to reflect the max score for match win
         document.getElementById("winnerBoard").innerHTML = "First to " + maxScore + " wins!";
 
@@ -78,7 +78,25 @@ function setup() {
 
 
         // and let's get cracking!
-        draw();
+        drawVsHuman();
+
+}
+
+function setupVsBot() {
+        // update the board to reflect the max score for match win
+        document.getElementById("winnerBoard").innerHTML = "First to " + maxScore + " wins!";
+
+        // now reset player and opponent scores
+        score1 = 0;
+        score2 = 0;
+
+
+        // set up all the 3D objects in the scene	
+        createScene();
+
+
+        // and let's get cracking!
+        drawVsBot();
 
 }
 
@@ -143,7 +161,6 @@ function createScene() {
                 new THREE.MeshLambertMaterial(
                         {
                                 color: 0xFF4045,
-
                         });
 
         // create the table's material	
@@ -336,18 +353,38 @@ function createScene() {
 
 }
 
-function draw() {
+
+
+function drawVsHuman() {
         // draw THREE.JS scene
         renderer.render(scene, camera);
         // loop draw function call
-        requestAnimationFrame(draw);
+        requestAnimationFrame(drawVsHuman);
 
         ballPhysics();
         paddlePhysics();
         cameraPhysics();
         playerPaddleMovement();
-        player2PaddleMovement();
-        //opponentPaddleMovement();
+        player2PaddleMovement(); // Vs Human
+
+        //opponentPaddleMovement(); // vs Bot
+
+}
+
+function drawVsBot() {
+        // draw THREE.JS scene
+        renderer.render(scene, camera);
+        // loop draw function call
+        requestAnimationFrame(drawVsBot);
+
+        ballPhysics();
+        paddlePhysics();
+        cameraPhysics();
+        playerPaddleMovement();
+        //player2PaddleMovement(); // Vs Human
+
+        opponentPaddleMovement(); // vs Bot
+
 }
 
 function ballPhysics() {
@@ -650,21 +687,28 @@ function matchScoreCheck() {
                 document.getElementById("scores").innerHTML = "CPU wins!";
                 document.getElementById("winnerBoard").innerHTML = "Refresh to play again";
                 // make paddle bounce up and down
-                // bounceTime++;
-                // paddle2.position.z = Math.sin(bounceTime * 0.1) * 10;
+                bounceTime++;
+                paddle2.position.z = Math.sin(bounceTime * 0.1) * 10;
                 // // enlarge and squish paddle to emulate joy
-                // paddle2.scale.z = 2 + Math.abs(Math.sin(bounceTime * 0.1)) * 10;
-                // paddle2.scale.y = 2 + Math.abs(Math.sin(bounceTime * 0.05)) * 10;
+                paddle2.scale.z = 2 + Math.abs(Math.sin(bounceTime * 0.1)) * 10;
+                paddle2.scale.y = 2 + Math.abs(Math.sin(bounceTime * 0.05)) * 10;
         }
 }
 
-//window.addEventListener("click", setup);
+// document.getElementById("vsHuman").addEventListener("click", setupVsHuman);
+// document.getElementById("vsBot").addEventListener("click", setupVsBot);
 
+function gameMode(vsBot) {
+        if (vsBot) {
+                setupVsBot();
 
+        } else {
+                setupVsHuman();
+        }
+}
+gameMode();
 
-
-setup();
-
+//setupVsBot();
 
 
 

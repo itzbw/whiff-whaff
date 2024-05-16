@@ -1,50 +1,8 @@
 <!doctype html>
 <html>
   <head>
+		<link rel="stylesheet" href="./style.css">
 		<title>3D PONG</title>
-
-		
-		<style>
-			body {
-				background-color: black;
-			}
-			
-			#gameCanvas {
-				background-color: black;
-				width: 640px;
-				height: 360px;
-				margin: auto;
-				align-content: center;
-			}
-			
-			#scoreboard {
-				text-align: center;
-				font-family: Segoe UI, Helvetica, Ubuntu, sans-serif;
-				color: white;
-			}
-			
-			#scores {
-				font-size: 300%;
-				padding: 0;
-				margin: 0;
-				color: white;
-				text-shadow:
-    0 0 7px #fff,
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #0fa,
-    0 0 82px #0fa,
-    0 0 92px #0fa,
-    0 0 102px #0fa,
-    0 0 110px #0fa;
-			}
-			
-			#title {
-				background-color: white;
-				color: black;
-			}
-		</style>
-	
 
 		<script type="importmap">
 			{
@@ -58,6 +16,7 @@
 
 	</head>
 	<body>
+		
 		<div id='scoreboard'>
 			<h1 id='title'>3D PONG</h1>
 			<h2 id='winnerBoard'>First to 5 wins!</h2>
@@ -66,10 +25,18 @@
 			<br>
 			<br>
 		</div>
-
-		<div id='gameCanvas'>
-        <script src="./src/game.js" type="module"></script>
+		<div id="gameCanvas">
+				<script src="./src/gameMode.js" type="module"></script> 
+				<script src="./src/game.js" type="module"></script> 
 			</div>
+	
+
+
+
+		<!-- <button onclick="gameMode(true)">Vs Bot</button>
+		<button onclick="gameMode(false)">Vs Human</button> -->
+
+			
 
 	</body>
 </html>
