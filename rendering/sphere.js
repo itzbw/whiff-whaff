@@ -1,9 +1,10 @@
 import * as THREE from 'three';
-import { texture } from 'three/examples/jsm/nodes/Nodes.js';
+import { objectPosition, texture } from 'three/examples/jsm/nodes/Nodes.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 50;
+const camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
+// zoom out 
+camera.position.z = 500;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -14,7 +15,10 @@ const material = new THREE.MeshBasicMaterial({
   map: new THREE.TextureLoader().load("./asset/smoke.png"),
 });
 const sphere = new THREE.Mesh(geometry, material);
-//scene.add(sphere);
+// distortion fisheye effect -> change camera persective
+sphere.position.x = -50;
+//sphere.position.y = -50;
+scene.add(sphere);
 
 
 const geometry2 = new THREE.SphereGeometry(15, 32, 16);
@@ -24,7 +28,7 @@ const material2 = new THREE.MeshBasicMaterial({
   wireframe: true
 });
 const sphere2 = new THREE.Mesh(geometry2, material2);
-//sphere2.position.y -= 100;
+
 scene.add(sphere2);
 
 
