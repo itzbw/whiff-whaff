@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-let scene, camera, renderer, cloudParticles = [], sphere, cubeScene;
+let scene, camera, renderer, cloudParticles = [], cubeScene;
 
 function init() {
   scene = new THREE.Scene();
@@ -122,16 +122,13 @@ function onWindowResize() {
 // cloud moving
 function render() {
   cloudParticles.forEach(p => {
-    p.rotation.z -= 0.005;
+    p.rotation.z -= 0.01;
   });
   renderer.render(scene, camera);
 
   requestAnimationFrame(render);
 
 }
-
-
-
 
 
 init();

@@ -1,5 +1,7 @@
 //import "./cube.js"
 
-import "./sphere.js"
+//import "./sphere.js"
 
-//import "./background.js"
+//import "./smoke.js"  
+
+import "./galaxy.js" 
