@@ -3,7 +3,7 @@ import { VerticalBlurShader } from 'three/examples/jsm/Addons.js';
 
 //https://discourse.threejs.org/t/uncaught-push-problem/37206
 
-let scene, camera, renderer, starGeo, stars;
+let scene, camera, renderer, starGeo, stars, sphere2;
 const vertices = [];
 const velocity = [];
 
@@ -12,9 +12,9 @@ function init() {
   scene = new THREE.Scene();
 
   //setup camera with facing upward
-  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.z = 1;
-  camera.rotation.x = Math.PI / 2;
+  camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 100;
+  //camera.rotation.x = Math.PI / 2;
 
 
   //setup renderer
@@ -46,8 +46,27 @@ function init() {
   });
   stars = new THREE.Points(starGeo, starMaterial);
   scene.add(stars);
+
+
+  // add shphere
+
+  const geometry2 = new THREE.SphereGeometry(15, 32, 16);
+  const material2 = new THREE.MeshBasicMaterial({
+    // map: new THREE.TextureLoader().load("./asset/smoke.png"),
+    color: 0xffffbb,
+    wireframe: true
+  });
+  sphere2 = new THREE.Mesh(geometry2, material2);
+  scene.add(sphere2);
+
+
   animate();
 }
+
+
+
+
+
 //rendering loop
 function animate() {
 
@@ -74,7 +93,13 @@ function animate() {
 
   positionAttribute.needsUpdate = true;
 
-  stars.rotation.y += 0.002;
+  stars.rotation.y += 0.001;
+  stars.rotation.x -= 0.001;
+
+
+  // sphere 2 movement
+  sphere2.rotation.x += 0.01;
+  sphere2.rotation.y += 0.01;
 
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
