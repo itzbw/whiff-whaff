@@ -167,10 +167,13 @@ function createScene() {
         var planeMaterial =
                 new THREE.MeshLambertMaterial(
                         {
-                                //color: 0x4BD121
-                                map: new THREE.TextureLoader().load('./assets/neon_gradient.png'),
-                                transparent: true,
-                                opacity: 0.1
+                                // color: 0x4BD121, //green
+                                //color: 0x00BFFF, // blue
+                                color: 0xA020F0, // purple
+                                // map: new THREE.TextureLoader().load('./assets/neon_gradient.png'),
+                                // transparent: true,
+                                // opacity: 0.1
+                                wireframe: true
                         });
         // create the plane's material
         var tableMaterial =

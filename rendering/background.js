@@ -1,15 +1,15 @@
 import * as THREE from 'three';
 
-let scene, camera, renderer, cloudParticles = [], sphere;
-
+let scene, camera, renderer, cloudParticles = [], sphere, cubeScene;
 
 function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.z = 1;
+  camera.position.z = 5;
   camera.rotation.x = 1.16;
   camera.rotation.y = -0.12;
-  camera.rotation.z = 0.27;
+  //camera.rotation.z = 0.27;
+  camera.rotation.z = 30;
 
   let ambient = new THREE.AmbientLight(0x555555);
   scene.add(ambient);
@@ -28,11 +28,21 @@ function init() {
   blueLight.position.set(300, 300, 200);
   scene.add(blueLight);
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({
+    alpha: true
+  }
+  );
   renderer.setSize(window.innerWidth, window.innerHeight);
   scene.fog = new THREE.FogExp2(0x708090, 0.001);
   renderer.setClearColor(scene.fog.color);
   document.body.appendChild(renderer.domElement);
+
+  // var geometry = new THREE.SphereGeometry(15, 32, 16);
+  // var material = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  // var sphere = new THREE.Mesh(geometry, material);
+  // scene.add(sphere);
+
+
 
   let loader = new THREE.TextureLoader();
 
@@ -94,10 +104,7 @@ function init() {
 
   // loader.load("./asset/smoke.png", function (texture) {
 
-  const geometry = new THREE.SphereGeometry(15, 32, 16);
-  const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
-  const sphere = new THREE.Mesh(geometry, material);
-  scene.add(sphere);
+
   // });
 
   window.addEventListener("resize", onWindowResize, false);
@@ -115,12 +122,18 @@ function onWindowResize() {
 // cloud moving
 function render() {
   cloudParticles.forEach(p => {
-    p.rotation.z -= 0.001;
+    p.rotation.z -= 0.005;
   });
   renderer.render(scene, camera);
 
-
   requestAnimationFrame(render);
+
 }
+
+
+
+
+
 init();
+//animate();
 

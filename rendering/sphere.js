@@ -14,7 +14,28 @@ const material = new THREE.MeshBasicMaterial({
   map: new THREE.TextureLoader().load("./asset/smoke.png"),
 });
 const sphere = new THREE.Mesh(geometry, material);
-scene.add(sphere);
+//scene.add(sphere);
+
+
+const geometry2 = new THREE.SphereGeometry(15, 32, 16);
+const material2 = new THREE.MeshBasicMaterial({
+  // map: new THREE.TextureLoader().load("./asset/smoke.png"),
+  //color: 0x000000,
+  wireframe: true
+});
+const sphere2 = new THREE.Mesh(geometry2, material2);
+//sphere2.position.y -= 100;
+scene.add(sphere2);
+
+
+function animate2() {
+  requestAnimationFrame(animate2);
+
+  sphere2.rotation.x += 0.01;
+  sphere2.rotation.y += 0.01;
+
+  renderer.render(scene, camera);
+};
 
 function animate() {
   requestAnimationFrame(animate);
@@ -26,3 +47,4 @@ function animate() {
 };
 
 animate();
+animate2();
