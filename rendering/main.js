@@ -4,4 +4,7 @@
 
 //import "./smoke.js"  
 
-import "./galaxy.js" 
+//import "./galaxy_sphere.js" 
+
+
+import "./galaxy.js"
