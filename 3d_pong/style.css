@@ -10,6 +10,31 @@ body {
   align-content: center;
 }
 
+#main-title {
+  font-size: 500%;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #0fa,
+    0 0 82px #0fa,
+    0 0 92px #0fa,
+    0 0 102px #0fa,
+    0 0 151px #0fa;
+  z-index: 20;
+}
+
+#threeContainer {
+  position: absolute;
+  z-index: 10;
+  /* position this canvas on top of the other one */
+}
+
 #scoreboard {
   text-align: center;
   font-family: Segoe UI, Helvetica, Ubuntu, sans-serif;
@@ -36,3 +61,5 @@ body {
   background-color: white;
   color: black;
 }
+
+/* title sign*/
