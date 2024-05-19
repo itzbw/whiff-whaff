@@ -698,20 +698,6 @@ function matchScoreCheck() {
         }
 }
 
-// document.getElementById("vsHuman").addEventListener("click", setupVsHuman);
-// document.getElementById("vsBot").addEventListener("click", setupVsBot);
-
-function gameMode(vsBot) {
-        if (vsBot) {
-                setupVsBot();
-
-        } else {
-                setupVsHuman();
-        }
-}
-gameMode();
-
-//setupVsBot();
 
 
 

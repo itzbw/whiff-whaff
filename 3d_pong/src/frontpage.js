@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { VerticalBlurShader } from 'three/examples/jsm/Addons.js';
-
-//https://discourse.threejs.org/t/uncaught-push-problem/37206
+import "./game.js"
 
 let scene, camera, renderer, starGeo, stars, sphere2;
 const vertices = [];
@@ -12,8 +11,8 @@ function init() {
   scene = new THREE.Scene();
 
   //setup camera with facing upward
-  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 100;
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 80;
   camera.rotation.x = 0.2;
 
 
@@ -52,7 +51,7 @@ function init() {
 
   // add shphere
 
-  const geometry2 = new THREE.SphereGeometry(15, 32, 16);
+  const geometry2 = new THREE.SphereGeometry(12, 32, 16);
   const material2 = new THREE.MeshBasicMaterial({
 
     map: new THREE.TextureLoader().load("./assets/moon.jpg"),
@@ -71,8 +70,6 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
-
-
 
 
 //rendering loop
@@ -112,4 +109,9 @@ function animate() {
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
-init();
+
+
+
+window.onload = function () {
+  init();
+}
