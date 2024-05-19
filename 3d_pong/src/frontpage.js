@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { VerticalBlurShader } from 'three/examples/jsm/Addons.js';
-import "./game.js"
 
 let scene, camera, renderer, starGeo, stars, sphere2;
 const vertices = [];
@@ -56,9 +55,10 @@ function init() {
 
     map: new THREE.TextureLoader().load("./assets/moon.jpg"),
     // color: 0xffffbb,
-    // wireframe: true
+    // wireframe : true
   });
   sphere2 = new THREE.Mesh(geometry2, material2);
+  sphere2.position.y = +20;
   scene.add(sphere2);
 
   window.addEventListener("resize", onWindowResize, false);

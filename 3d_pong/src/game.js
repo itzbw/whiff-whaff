@@ -698,6 +698,7 @@ function matchScoreCheck() {
         }
 }
 
+setupVsBot();
 
 
 
