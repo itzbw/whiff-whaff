@@ -72,10 +72,8 @@ function setupVsHuman() {
         score1 = 0;
         score2 = 0;
 
-
         // set up all the 3D objects in the scene	
         createScene();
-
 
         // and let's get cracking!
         drawVsHuman();
@@ -90,10 +88,8 @@ function setupVsBot() {
         score1 = 0;
         score2 = 0;
 
-
         // set up all the 3D objects in the scene	
         createScene();
-
 
         // and let's get cracking!
         drawVsBot();
@@ -101,11 +97,9 @@ function setupVsBot() {
 }
 
 function createScene() {
-
-
         // set the scene size
-        var WIDTH = 640,
-                HEIGHT = 360;
+        var WIDTH = 600,
+                HEIGHT = 400;
 
         // set some camera attributes
         var VIEW_ANGLE = 60,
@@ -115,8 +109,7 @@ function createScene() {
 
         var c = document.getElementById("gameCanvas");
 
-        // create a WebGL renderer, camera
-        // and a scene
+        // create a WebGL renderer, camera and a scene
         renderer = new THREE.WebGLRenderer();
         camera =
                 new THREE.PerspectiveCamera(
@@ -127,13 +120,10 @@ function createScene() {
 
         scene = new THREE.Scene();
 
-
-
         // add the camera to the scene
         scene.add(camera);
 
         // set a default position for the camera
-        // not doing this somehow messes up shadow rendering
         camera.position.z = 320;
 
         // start the renderer
@@ -151,8 +141,7 @@ function createScene() {
         var paddle1Material =
                 new THREE.MeshLambertMaterial(
                         {
-                                color: 0xffffff,
-
+                                color: 0xffffff, // white
                         });
 
 
@@ -160,7 +149,7 @@ function createScene() {
         var paddle2Material =
                 new THREE.MeshLambertMaterial(
                         {
-                                color: 0xFF4045,
+                                color: 0xFF4045, // red
                         });
 
         // create the table's material	
@@ -170,17 +159,13 @@ function createScene() {
                                 // color: 0x4BD121, //green
                                 //color: 0x00BFFF, // blue
                                 color: 0xA020F0, // purple
-                                // map: new THREE.TextureLoader().load('./assets/neon_gradient.png'),
-                                // transparent: true,
-                                // opacity: 0.1
-                                wireframe: true
+                                wireframe: true // the gridline
                         });
         // create the plane's material
         var tableMaterial =
                 new THREE.MeshLambertMaterial(
                         {
                                 color: 0x111111
-
                         });
 
         var groundMaterial =
@@ -190,8 +175,6 @@ function createScene() {
                                 transparent: true,
                                 opacity: 0
                         });
-
-
 
         // create the playing surface plane
         var plane = new THREE.Mesh(
@@ -223,7 +206,7 @@ function createScene() {
         table.receiveShadow = true;
 
         // // set up the sphere vars
-        // lower 'segment' and 'ring' values will increase performance
+        // increase 'segment' and 'ring' values will increase graphic quality
         var radius = 10,
                 segments = 32,
                 rings = 16;
@@ -325,18 +308,18 @@ function createScene() {
         ground.receiveShadow = true;
         scene.add(ground);
 
-        // // create a point light
-        // pointLight =
-        //         new THREE.PointLight(0xF8D898);
+        // create a point light
+        pointLight =
+                new THREE.PointLight(0xF8D898);
 
-        // // set its position
-        // pointLight.position.x = -1000;
-        // pointLight.position.y = 0;
-        // pointLight.position.z = 1000;
-        // pointLight.intensity = 2.9;
-        // pointLight.distance = 10000;
-        // // add to the scene
-        // scene.add(pointLight);
+        // set its position
+        pointLight.position.x = -1000;
+        pointLight.position.y = 0;
+        pointLight.position.z = 1000;
+        pointLight.intensity = 2.9;
+        pointLight.distance = 10000;
+        // add to the scene
+        scene.add(pointLight);
 
         ambiLight = new THREE.AmbientLight(0xffffff, 4);
         scene.add(ambiLight);
@@ -356,8 +339,6 @@ function createScene() {
 
 }
 
-
-
 function drawVsHuman() {
         // draw THREE.JS scene
         renderer.render(scene, camera);
@@ -369,8 +350,6 @@ function drawVsHuman() {
         cameraPhysics();
         playerPaddleMovement();
         player2PaddleMovement(); // Vs Human
-
-        //opponentPaddleMovement(); // vs Bot
 
 }
 
@@ -384,8 +363,6 @@ function drawVsBot() {
         paddlePhysics();
         cameraPhysics();
         playerPaddleMovement();
-        //player2PaddleMovement(); // Vs Human
-
         opponentPaddleMovement(); // vs Bot
 
 }
@@ -457,11 +434,6 @@ function opponentPaddleMovement() {
                         paddle2.position.y -= paddleSpeed;
                 }
         }
-        // We lerp the scale back to 1
-        // this is done because we stretch the paddle at some points
-        // stretching is done when paddle touches side of table and when paddle hits ball
-        // by doing this here, we ensure paddle always comes back to default size
-        paddle2.scale.y += (1 - paddle2.scale.y) * 0.2;
 }
 
 
@@ -591,7 +563,7 @@ function paddlePhysics() {
                         ballRotationSpd.z = 0;
                 }
 
-                ballSpeed += 0.3;
+                ballSpeed += 0.1;
         }
 
         // PLAYER PADDLE LOGIC
@@ -698,7 +670,9 @@ function matchScoreCheck() {
         }
 }
 
-setupVsBot();
 
-
+window.onload = function () {
+        setupVsBot(); // loading vsbot by default
+        // setupVsHuman(); 
+}
 

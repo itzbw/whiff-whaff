@@ -70,4 +70,12 @@ body {
   color: black;
 }
 
+button {
+  background-color: lightgrey;
+  padding: 7px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 /* title sign*/

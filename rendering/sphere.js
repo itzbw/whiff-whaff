@@ -18,7 +18,7 @@ const sphere = new THREE.Mesh(geometry, material);
 // distortion fisheye effect -> change camera persective
 sphere.position.x = -50;
 //sphere.position.y = -50;
-scene.add(sphere);
+//scene.add(sphere);
 
 
 const geometry2 = new THREE.SphereGeometry(15, 32, 16);
@@ -29,7 +29,7 @@ const material2 = new THREE.MeshBasicMaterial({
 });
 const sphere2 = new THREE.Mesh(geometry2, material2);
 
-scene.add(sphere2);
+//scene.add(sphere2);
 
 
 function animate2() {
@@ -50,5 +50,36 @@ function animate() {
   renderer.render(scene, camera);
 };
 
-animate();
-animate2();
+function ball1() {
+  scene.add(sphere);
+  animate();
+  console.log("ball1");
+
+}
+
+function ball2() {
+  scene.add(sphere2);
+  animate2();
+  console.log("ball2");
+}
+
+// ball1();
+// ball2();
+
+document.getElementById("clickMe").onclick = ball1;
+
+var el = document.getElementById("clickMe");
+if (el.addEventListener)
+  el.addEventListener("click", ball1, false);
+else if (el.attachEvent)
+  el.attachEvent('onclick', ball1);
+
+document.getElementById("clickMe2").onclick = ball2;
+
+var el = document.getElementById("clickMe2");
+if (el.addEventListener)
+  el.addEventListener("click", ball2, false);
+else if (el.attachEvent)
+  el.attachEvent('onclick', ball2);
+
+//animate2();

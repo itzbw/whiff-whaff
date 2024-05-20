@@ -1,6 +1,11 @@
 import * as THREE from 'three';
 import { VerticalBlurShader } from 'three/examples/jsm/Addons.js';
 
+// ------------------------------------- //
+// ------- Front Page with  ------------ //
+// ------- Galazy and Sphere------------ //
+// ------------------------------------- //
+
 let scene, camera, renderer, starGeo, stars, sphere2;
 const vertices = [];
 const velocity = [];
@@ -72,7 +77,7 @@ function onWindowResize() {
 }
 
 
-//rendering loop
+//rendering loop of the stars dot
 function animate() {
 
   const positionAttribute = stars.geometry.getAttribute('position');
