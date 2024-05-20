@@ -53,14 +53,12 @@ function animate() {
 function ball1() {
   scene.add(sphere);
   animate();
-  console.log("ball1");
 
 }
 
 function ball2() {
   scene.add(sphere2);
   animate2();
-  console.log("ball2");
 }
 
 // ball1();
