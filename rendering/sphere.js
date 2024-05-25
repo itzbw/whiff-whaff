@@ -5,16 +5,25 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
 // zoom out 
 camera.position.z = 500;
+scene.add(camera);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const geometry = new THREE.SphereGeometry(15, 32, 16);
-const material = new THREE.MeshBasicMaterial({
+
+
+var materialSmoke = new THREE.MeshBasicMaterial({
   map: new THREE.TextureLoader().load("./asset/smoke.png"),
 });
-const sphere = new THREE.Mesh(geometry, material);
+var materialStars = new THREE.MeshBasicMaterial({
+  wireframe: true
+});
+
+
+
+const sphere = new THREE.Mesh(geometry, materialSmoke); // smoke by deflaut
 // distortion fisheye effect -> change camera persective
 sphere.position.x = -50;
 //sphere.position.y = -50;
@@ -26,10 +35,11 @@ const material2 = new THREE.MeshBasicMaterial({
   // map: new THREE.TextureLoader().load("./asset/smoke.png"),
   //color: 0x000000,
   wireframe: true
+
 });
 const sphere2 = new THREE.Mesh(geometry2, material2);
 
-//scene.add(sphere2);
+// scene.add(sphere2);
 
 
 function animate2() {
@@ -50,34 +60,36 @@ function animate() {
   renderer.render(scene, camera);
 };
 
-function ball1() {
+function ball_1() {
+  if (sphere2)
+    scene.remove(sphere2);
   scene.add(sphere);
   animate();
-
 }
 
-function ball2() {
+function ball_2() {
+  if (sphere)
+    scene.remove(sphere);
   scene.add(sphere2);
   animate2();
+
 }
 
-// ball1();
-// ball2();
+var ball1 = document.getElementById("ball1");
+var ball2 = document.getElementById("ball2");
 
-document.getElementById("clickMe").onclick = ball1;
 
-var el = document.getElementById("clickMe");
-if (el.addEventListener)
-  el.addEventListener("click", ball1, false);
-else if (el.attachEvent)
-  el.attachEvent('onclick', ball1);
 
-document.getElementById("clickMe2").onclick = ball2;
+ball1.onclick = function () {
+  ball_1();
 
-var el = document.getElementById("clickMe2");
-if (el.addEventListener)
-  el.addEventListener("click", ball2, false);
-else if (el.attachEvent)
-  el.attachEvent('onclick', ball2);
+}
 
-//animate2();
+ball2.onclick = function () {
+  ball_2();
+}
+
+window.onload = function () {
+  ball_1();
+}
+
