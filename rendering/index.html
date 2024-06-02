@@ -2,9 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <script type="importmap">
       {
         "imports": {
@@ -13,20 +12,29 @@
         }
       }
     </script>
+
     
     <title>Rendering</title>
   </head>
   <body>
-    <!-- <div id="ball"></div> -->
-    <button id="ball1">ball1</button>
-    <button id="ball2">ball2</button>
+  
+    <nav>
+      <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+      </ul>
+  </nav>
 
 
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
+    <div id="content">
 
-    
-    <script src="/sphere.js"></script>
+    </div> 
+    <script type="module" src="main.js"></script>
+    <script type="module" src="sphere.js"></script>
+    <script type="module" src="cube.js"></script>
+    <script type="module" src="naturalMesh.js"></script>
+
 
   </body>
 </html>

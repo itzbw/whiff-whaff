@@ -1,5 +1,4 @@
-import * as THREE from 'three';
-import { objectPosition, texture } from 'three/examples/jsm/nodes/Nodes.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -20,8 +19,6 @@ var materialSmoke = new THREE.MeshBasicMaterial({
 var materialStars = new THREE.MeshBasicMaterial({
   wireframe: true
 });
-
-
 
 const sphere = new THREE.Mesh(geometry, materialSmoke); // smoke by deflaut
 // distortion fisheye effect -> change camera persective
@@ -60,7 +57,7 @@ function animate() {
   renderer.render(scene, camera);
 };
 
-function ball_1() {
+export function ball_1() {
   if (sphere2)
     scene.remove(sphere2);
   scene.add(sphere);
@@ -75,21 +72,25 @@ function ball_2() {
 
 }
 
-var ball1 = document.getElementById("ball1");
-var ball2 = document.getElementById("ball2");
-
-
-
-ball1.onclick = function () {
-  ball_1();
-
+export function printBall() {
+  console.log("Ball 1");
 }
 
-ball2.onclick = function () {
-  ball_2();
-}
+// var ball1 = document.getElementById("ball1");
+// var ball2 = document.getElementById("ball2");
 
-window.onload = function () {
-  ball_1();
-}
+
+
+// ball1.onclick = function () {
+//   ball_1();
+
+// }
+
+// ball2.onclick = function () {
+//   ball_2();
+// }
+
+// window.onload = function () {
+//   ball_1();
+// }
 

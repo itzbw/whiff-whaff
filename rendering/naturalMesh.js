@@ -1,5 +1,4 @@
-import * as THREE from 'three';
-import { Wireframe } from 'three/examples/jsm/Addons.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js';
 
 const width = window.innerWidth, height = window.innerHeight;
 
@@ -18,7 +17,7 @@ const material = new THREE.MeshNormalMaterial(
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height);
 renderer.setAnimationLoop(animation);
 document.body.appendChild(renderer.domElement);
@@ -33,3 +32,12 @@ function animation(time) {
   renderer.render(scene, camera);
 
 }
+
+// function naturalMesh() {
+//   animation();
+// }
+
+export function printNaturalMesh() {
+  console.log("Natural Mesh");
+}
+
