@@ -63,6 +63,17 @@ var Key = {
 // ------- GAME FUNCTIONS -------------- //
 // ------------------------------------- //
 
+var ball1 = document.getElementById("ball1");
+var ball2 = document.getElementById("ball2");
+
+ball1.onclick = function () {
+        setupVsHuman();
+}
+
+ball2.onclick = function () {
+        setupVsBot();
+}
+
 
 function setupVsHuman() {
         // update the board to reflect the max score for match win
@@ -671,8 +682,8 @@ function matchScoreCheck() {
 }
 
 
-window.onload = function () {
-        setupVsBot(); // loading vsbot by default
-        // setupVsHuman(); 
-}
+// window.onload = function () {
+//         setupVsBot(); // loading vsbot by default
+//         // setupVsHuman(); 
+// }
 

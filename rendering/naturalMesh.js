@@ -33,9 +33,16 @@ function animation(time) {
 
 }
 
-// function naturalMesh() {
-//   animation();
-// }
+export function naturalMesh() {
+  animation();
+}
+
+export function deleteNaturalMesh() {
+  if (mesh)
+    scene.remove(mesh);
+  renderer.dispose();
+  renderer.clear();
+}
 
 export function printNaturalMesh() {
   console.log("Natural Mesh");

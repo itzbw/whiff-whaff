@@ -72,6 +72,13 @@ function ball_2() {
 
 }
 
+export function deleteSphere() {
+  if (sphere)
+    scene.remove(sphere);
+  renderer.dispose();
+  renderer.clear();
+}
+
 export function printBall() {
   console.log("Ball 1");
 }

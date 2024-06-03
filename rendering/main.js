@@ -1,8 +1,11 @@
-import { printBall } from './sphere.js';
-import { ball_1 } from './sphere.js';
-import { printCube } from './cube.js';
-import { square } from './cube.js';
-import { printNaturalMesh } from './naturalMesh.js';
+
+import { ball_1, deleteSphere } from './sphere.js';
+
+import { square, deleteSquare } from './cube.js';
+
+import { naturalMesh, deleteNaturalMesh } from './naturalMesh.js';
+
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,21 +20,24 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (hash) {
       case 'home':
         contentDiv.innerHTML = "<h1>Home</h1><p>Welcome to the home page!</p>";
-        // loadHomeScript();
-        printBall();
+        // deleteSquare();
+        // deleteNaturalMesh();
         ball_1();
         break;
       case 'about':
         contentDiv.innerHTML = "<h1>About</h1><p>This is the about page.</p>";
-        // loadAboutScript();
+
+        // deleteNaturalMesh();
+        // deleteSphere();
         square();
-        printCube();
+
         break;
       case 'contact':
         contentDiv.innerHTML = "<h1>Contact</h1><p>Get in touch with us.</p>";
-        // loadContactScript();
-        //naturalMesh();
-        printNaturalMesh();
+
+        // deleteSphere();
+        // deleteSquare();
+        naturalMesh();
         break;
       default:
         contentDiv.innerHTML = "<h1>Home</h1><p>Welcome to the home page!</p>";
