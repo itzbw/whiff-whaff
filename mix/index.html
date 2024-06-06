@@ -15,8 +15,6 @@
 				"imports": {
 					"three": "https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js",
 					"three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.149.0/examples/jsm/",
-					"FontLoader": "https://cdn.jsdelivr.net/npm/three@v0.149.0/examples/jsm/loaders/FontLoader.js",
-
 				}
 			}
 		</script>
@@ -83,9 +81,15 @@
 				<div class="row h-75">
 					<div class="col-12 col-md-8 mx-md-4 border border-white">
 						<div id="main-window" class="h-100 bg-secondary opacity-50 align-content-center">
-							<p class="text-center">THIS WILL BE THE MAIN WINDOW</p>
+							
 							
 							<script type="module" src="./js/frontpage.js"></script>
+
+
+						
+
+
+							<!-- <p class="text-center">THIS WILL BE THE MAIN WINDOW</p> -->
 						</div>
 					</div>
 					<div class="col-12 col-md-3 mx-md-2 border border-white">
@@ -225,15 +229,15 @@
 
 					<!-- modal body -->
 					<div class="modal-body">
-							<button class="btn w-100 mb-2" onclick="selectGameMode('classic')">
+							<button class="btn w-100 mb-2" onclick="selectGameMode('vsBot')" type="button" data-bs-dismiss="modal" aria-label="Close">
 									<p class="fs-4">vs Bot</p>
 							</button>
 
-							<button class="btn w-100 mb-2" onclick="selectGameMode('arcade')">
+							<button class="btn w-100 mb-2" onclick="selectGameMode('vsHuman')" type="button" data-bs-dismiss="modal" aria-label="Close">
 									<p class="fs-4">vs Human</p>
 							</button>
 
-							<button class="btn w-100 mb-2" onclick="selectGameMode('tournament')">
+							<button class="btn w-100 mb-2" onclick="selectGameMode('tournament')" type="button" data-bs-dismiss="modal" aria-label="Close">
 									<p class="fs-4">Tournament</p>
 							</button>
 					</div>
@@ -246,7 +250,19 @@
 		<!-- Scripts -->
 		<script src="./js/background.js"></script>
 		<script src="./js/language.js"></script>
+		<script src="./js/frontpage.js" type="module"></script>
+		<script src="./js/selectGameMode.js">	</script>
+		<script src="./js/vsBot.js" type="module"></script>
 
+		<!-- <script>function loadGameScript(scriptPath) {
+			const mainWindow = document.getElementById('main-window');
+			mainWindow.innerHTML = '';  // Clear existing content
+			const script = document.createElement('script');
+			script.src = scriptPath;
+			script.type = 'text/javascript';
+			mainWindow.appendChild(script);
+		}</script> -->
+		
 
 		<!-- Bootstrap 5.3.3 -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

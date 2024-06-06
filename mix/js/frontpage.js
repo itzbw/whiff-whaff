@@ -1,10 +1,10 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js';
-import { FontLoader } from 'https://cdn.jsdelivr.net/npm/three@v0.149.0/examples/jsm/loaders/FontLoader.js';
+// import { SpriteText2D, textAlign } from 'https://cdn.jsdelivr.net/npm/three-text2d@0.6.0/lib/index.min.js '
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
 // zoom out 
-camera.position.z = 300;
+camera.position.z = 200;
 scene.add(camera);
 
 const renderer = new THREE.WebGLRenderer();
@@ -12,6 +12,7 @@ const renderer = new THREE.WebGLRenderer();
 // document.body.appendChild(renderer.domElement);
 
 const mainWindow = document.getElementById('main-window');
+
 
 const resizeRenderer = () => {
   const width = mainWindow.clientWidth;
@@ -41,25 +42,18 @@ sphere.position.y = 0;
 //sphere.position.y = -50;
 scene.add(sphere);
 
+// var sprite = new SpriteText2D("SPRITE", { align: textAlign.center, font: '40px Arial', fillStyle: '#000000', antialias: false })
+// scene.add(sprite)
 
-const loader = new FontLoader();
-loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
-  const textGeometry = new TextGeometry('3D PONG', {
-    font: font,
-    size: 10,
-    height: 1,
-  });
+// let sprite = new SpriteText2D({
+//   text: '3D PONG',
+//   alignment: 'center',
+//   fontFamily: 'Arial, Helvetica, sans-serif',
+//   fontSize: 28,
+//   color: '#ffffff'
+// });
 
-  const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-  const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-
-  // Position text below the sphere
-  textMesh.position.set(-30, -30, 0); // Adjust position as needed
-  scene.add(textMesh);
-});
-
-
-
+// scene.add(sprite);
 
 function animate() {
   requestAnimationFrame(animate);
@@ -72,7 +66,9 @@ function animate() {
 
 function loadFrontPage() {
   console.log("Front page loaded");
+
   animate();
+
 }
 
 window.addEventListener('resize', resizeRenderer);

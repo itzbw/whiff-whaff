@@ -1,22 +1,35 @@
+import { setupVsBot } from './vsBot.js';
+
 function selectGameMode(mode) {
-  console.log(`Game mode selected: ${mode}`);
-  // Implement your game mode selection logic here
-  // For example, redirect to the game mode page or load the game mode settings
-  switch (mode) {
-    case 'classic':
-      // Redirect or load classic mode
-      break;
-    case 'arcade':
-      // Redirect or load arcade mode
-      break;
-    case 'tournament':
-      // Redirect or load tournament mode
-      break;
-    default:
-      // Handle default case
-      break;
+  if (mode === 'vsBot') {
+    loadGame('vsBot');
+    console.log("vsBot selectgame loaded");
+
   }
-  // Close the modal after selection
-  let modal = bootstrap.Modal.getInstance(document.getElementById('gameModeModal'));
-  modal.hide();
+  else if (mode === 'vsHuman') {
+    loadGame('vsHuman');
+    console.log("vsHuman selectgame loaded");
+  } else if (mode === 'tournament') {
+    loadGame('tournament');
+    console.log("tournament selectgame loaded");
+  }
 }
+
+function loadGame(mode) {
+  const mainWindow = document.getElementById('main-window');
+  if (mode === 'vsBot') {
+    mainWindow.innerHTML = '<p>Loading vs Bot Game...</p>';
+    console.log("vsBot game loaded");
+
+
+  }
+  else if (mode === 'vsHuman') {
+    mainWindow.innerHTML = '<p>Loading vs Human Game...</p>';
+    console.log("vsHuman game loaded");
+  }
+  else if (mode === 'tournament') {
+    mainWindow.innerHTML = '<p>Loading Tournament Game...</p>';
+    console.log("tournament game loaded");
+  }
+}
+
