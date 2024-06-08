@@ -17,3 +17,60 @@ canvas.background-canvas {
     z-index: -1;
     /* absolute back */
 }
+
+
+/* for the game only */
+#gameCanvas {
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* width: 640px;
+    height: 360px; */
+    margin: auto;
+    align-content: center;
+}
+
+#scoreboard {
+    text-align: center;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Segoe UI, Helvetica, Ubuntu, sans-serif;
+    color: white;
+}
+
+#scores {
+    font-size: 300%;
+    padding: 0;
+    margin: 0;
+    color: white;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 110px #0fa;
+}
+
+#main-bottom-window {
+    font-size: 300%;
+    padding: 0;
+    margin: 0;
+    color: white;
+    text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 110px #0fa;
+
+}

@@ -11,7 +11,7 @@ const renderer = new THREE.WebGLRenderer();
 // renderer.setSize(window.innerWidth, window.innerHeight);
 // document.body.appendChild(renderer.domElement);
 
-const mainWindow = document.getElementById('main-window');
+const mainWindow = document.getElementById('main-top-window');
 
 
 const resizeRenderer = () => {

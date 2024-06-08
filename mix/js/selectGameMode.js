@@ -1,4 +1,4 @@
-import { setupVsBot } from './vsBot.js';
+
 
 function selectGameMode(mode) {
   if (mode === 'vsBot') {
@@ -17,15 +17,16 @@ function selectGameMode(mode) {
 
 function loadGame(mode) {
   const mainWindow = document.getElementById('main-window');
+  var script = document.createElement('script');
   if (mode === 'vsBot') {
     mainWindow.innerHTML = '<p>Loading vs Bot Game...</p>';
     console.log("vsBot game loaded");
-
-
+    window.setupVsBot();
   }
   else if (mode === 'vsHuman') {
     mainWindow.innerHTML = '<p>Loading vs Human Game...</p>';
     console.log("vsHuman game loaded");
+    window.setupVsHuman();
   }
   else if (mode === 'tournament') {
     mainWindow.innerHTML = '<p>Loading Tournament Game...</p>';
