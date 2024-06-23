@@ -33,7 +33,7 @@ const boardLength = 5;
 const boardGeometry = new THREE.BoxGeometry(boardWidth, 0.2, boardLength, 10, 10, 10); // Width, height (depth), length
 const boardMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, wireframe: true }); // Brown color for the board
 const board = new THREE.Mesh(boardGeometry, boardMaterial);
-board.position.y = -0.1; //
+board.position.y = -0.1;
 scene.add(board);
 
 // Create paddles
@@ -57,7 +57,8 @@ rightPaddle.position.set(5, 0.15, 0); // Position it on the right edge of the bo
 scene.add(rightPaddle);
 
 // Create a sphere geometry
-const sphereGeometry = new THREE.SphereGeometry(0.3, 32, 32); // Radius, width segments, height segments
+const ballRadius = 0.3;
+const sphereGeometry = new THREE.SphereGeometry(ballRadius, 32, 32); // Radius, width segments, height segments
 const sphereMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000, wireframe: true }); // Red color for the sphere
 const ball = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
@@ -68,10 +69,12 @@ scene.add(ball);
 // variable for ball movement
 let ballDirX = 0.1;
 let ballDirZ = 0.1;
+var ballRotationSpd = { x: 0.2, y: 0, z: 0 }
 
 // Score
 let leftScore = 0
 let rightScore = 0;
+const scoreLimit = 7;
 
 /////////////////// HTML Score Showing /////////////////////
 const leftScoreElement = document.createElement('div');
@@ -91,6 +94,16 @@ rightScoreElement.style.color = 'white';
 rightScoreElement.style.fontSize = '24px';
 rightScoreElement.innerHTML = 'Right: 0';
 document.body.appendChild(rightScoreElement);
+
+const winnerElement = document.createElement('div');
+winnerElement.style.position = 'absolute';
+winnerElement.style.top = '20%';
+winnerElement.style.left = '50%';
+winnerElement.style.transform = 'translate(-50%, -50%)';
+winnerElement.style.color = 'white';
+winnerElement.style.fontSize = '48px';
+winnerElement.style.display = 'none';
+document.body.appendChild(winnerElement);
 
 
 
@@ -149,17 +162,43 @@ document.addEventListener('keyup', (event) => {
   }
 });
 
-
+// reset ball
 function resetBall() {
   ball.position.set(0, 0.1, 0);
   ballDirX = (Math.random() > 0.5 ? 0.1 : -0.1); // random direction
   ballDirZ = (Math.random() - 0.5) * 0.2;; // random direction
 }
 
+// reset game
+function resetGame() {
+  leftScore = 0;
+  rightScore = 0;
+  leftScoreElement.innerHTML = `Left: ${leftScore}`;
+  rightScoreElement.innerHTML = `Right: ${rightScore}`;
+  winnerElement.style.display = 'none';
+  ball.position.set(0, 0.1, 0);
+  //resetBall();
+
+}
+
 
 // Render the scene from the perspective of the camera
 function animate() {
   requestAnimationFrame(animate);
+
+  // check winner
+  if (leftScore >= scoreLimit) {
+    winnerElement.innerHTML = 'Left Player Wins!';
+    winnerElement.style.display = 'block';
+
+    return;
+  } else if (rightScore >= scoreLimit) {
+    winnerElement.innerHTML = 'Right Player Wins!';
+    winnerElement.style.display = 'block';
+
+    return;
+  }
+
 
   // Paddle movement based on key states
   const paddleSpeed = 0.2;
@@ -191,23 +230,40 @@ function animate() {
     ballDirZ = -ballDirZ;
 
   // ball collision with the paddle
+  const onCollide = () => {
+    if (ballRotationSpd.x) {
+      ballRotationSpd.y = ballRotationSpd.x;
+      ballRotationSpd.x = 0;
+    } else if (ballRotationSpd.y) {
+      ballRotationSpd.z = ballRotationSpd.y;
+      ballRotationSpd.y = 0;
+    } else if (ballRotationSpd.z) {
+      ballRotationSpd.x = ballRotationSpd.z;
+      ballRotationSpd.z = 0;
+    }
+  }
   // Right paddle
   if ((ball.position.x > rightPaddle.position.x - paddleLength / 2 && ball.position.x > rightPaddle.position.x - paddleLength / 2) &&
-    ball.position.z > rightPaddle.position.z - paddleLength / 2 && ball.position.z < rightPaddle.position.z + paddleLength / 2)
+    ball.position.z > rightPaddle.position.z - paddleLength / 2 && ball.position.z < rightPaddle.position.z + paddleLength / 2) {
+    onCollide();
     ballDirX = -ballDirX;
+  }
 
   //Left Paddle
   if ((ball.position.x < leftPaddle.position.x - paddleLength / 2 && ball.position.x < leftPaddle.position.x - paddleLength / 2) &&
-    ball.position.z > leftPaddle.position.z - paddleLength / 2 && ball.position.z < leftPaddle.position.z - paddleLength / 2)
+    ball.position.z > leftPaddle.position.z - paddleLength / 2 && ball.position.z < leftPaddle.position.z - paddleLength / 2) {
+    onCollide();
     ballDirX = -ballDirX;
+  }
 
   // if ball goes beyond letf or right edeg, score ++
-  if (ball.position.x > boardWidth / 2) {
+  if (ball.position.x > (boardWidth / 2 - ballRadius / 2)) {
     // Left player scores
     leftScore += 1;
     leftScoreElement.innerHTML = `Left: ${leftScore}`;
     resetBall();
-  } else if (ball.position.x < -boardWidth / 2) {
+
+  } else if (ball.position.x < (-boardWidth / 2 - ballRadius / 2)) {
     // Right player scores
     rightScore += 1;
     rightScoreElement.innerHTML = `Right: ${rightScore}`;
