@@ -176,14 +176,10 @@ function resetGame() {
   leftScoreElement.innerHTML = `Left: ${leftScore}`;
   rightScoreElement.innerHTML = `Right: ${rightScore}`;
   winnerElement.style.display = 'none';
-  ball.position.set(0, 0.1, 0);
-  resetBall();
+  // ball.position.set(0, 0.1, 0);
+  //resetBall();
 
 }
-
-// AI paddle movement speed
-const aiPaddleSpeed = 0.05;
-
 
 // Render the scene from the perspective of the camera
 function animate() {
@@ -193,12 +189,12 @@ function animate() {
   if (leftScore >= scoreLimit) {
     winnerElement.innerHTML = 'Left Player Wins!';
     winnerElement.style.display = 'block';
-    setTimeout(resetGame, 3000);
+    //setTimeout(resetGame, 3000);
     return;
   } else if (rightScore >= scoreLimit) {
     winnerElement.innerHTML = 'Right Player Wins!';
     winnerElement.style.display = 'block';
-    setTimeout(resetGame, 3000);
+    //setTimeout(resetGame, 3000);
     return;
   }
 
@@ -246,12 +242,14 @@ function animate() {
       ballRotationSpd.z = 0;
     }
   }
+
   // Right paddle
   if ((ball.position.x > rightPaddle.position.x - paddleWidth / 2 && ball.position.x < rightPaddle.position.x + paddleWidth / 2) &&
     ball.position.z > rightPaddle.position.z - paddleHalfDepth && ball.position.z < rightPaddle.position.z + paddleHalfDepth) {
     // onCollide();
     ballDirX = -ballDirX;
   }
+
 
   //Left Paddle
   if ((ball.position.x < leftPaddle.position.x + paddleWidth / 2 && ball.position.x > leftPaddle.position.x - paddleWidth / 2) &&
@@ -261,14 +259,15 @@ function animate() {
   }
 
 
+
   // if ball goes beyond letf or right edeg, score ++
-  if (ball.position.x > (boardWidth / 2 - ballRadius / 2)) {
+  if (ball.position.x > (boardWidth / 2 + ballRadius)) {
     // Left player scores
     leftScore += 1;
     leftScoreElement.innerHTML = `Left: ${leftScore}`;
     resetBall();
 
-  } else if (ball.position.x < (-boardWidth / 2 - ballRadius / 2)) {
+  } else if (ball.position.x < (-boardWidth / 2 - ballRadius)) {
     // Right player scores
     rightScore += 1;
     rightScoreElement.innerHTML = `Right: ${rightScore}`;

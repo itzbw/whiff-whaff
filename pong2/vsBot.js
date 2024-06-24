@@ -271,13 +271,13 @@ function animate() {
 
 
   // if ball goes beyond letf or right edeg, score ++
-  if (ball.position.x > (boardWidth / 2 - ballRadius / 2)) {
+  if (ball.position.x > (boardWidth / 2 + ballRadius)) {
     // Left player scores
     leftScore += 1;
     leftScoreElement.innerHTML = `Left: ${leftScore}`;
     resetBall();
 
-  } else if (ball.position.x < (-boardWidth / 2 - ballRadius / 2)) {
+  } else if (ball.position.x < (-boardWidth / 2 - ballRadius)) {
     // Right player scores
     rightScore += 1;
     rightScoreElement.innerHTML = `Right: ${rightScore}`;
