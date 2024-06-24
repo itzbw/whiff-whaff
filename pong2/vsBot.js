@@ -176,7 +176,7 @@ function resetGame() {
   leftScoreElement.innerHTML = `Left: ${leftScore}`;
   rightScoreElement.innerHTML = `Right: ${rightScore}`;
   winnerElement.style.display = 'none';
-  ball.position.set(0, 0.1, 0);
+  // ball.position.set(0, 0.1, 0);
   resetBall();
 
 }
@@ -193,12 +193,14 @@ function animate() {
   if (leftScore >= scoreLimit) {
     winnerElement.innerHTML = 'Left Player Wins!';
     winnerElement.style.display = 'block';
-    setTimeout(resetGame, 3000);
+    //setTimeout(resetGame, 3000);
+    //resetGame();
     return;
   } else if (rightScore >= scoreLimit) {
     winnerElement.innerHTML = 'Right Player Wins!';
     winnerElement.style.display = 'block';
-    setTimeout(resetGame, 3000);
+    //setTimeout(resetGame, 3000);
+    //resetGame();
     return;
   }
 
@@ -206,16 +208,23 @@ function animate() {
   // Paddle movement based on key states
   const paddleSpeed = 0.2;
   if (keys.ArrowUp) {
-    rightPaddle.position.z -= paddleSpeed;
-  }
-  if (keys.ArrowDown) {
-    rightPaddle.position.z += paddleSpeed;
-  }
-  if (keys.KeyW) {
     leftPaddle.position.z -= paddleSpeed;
   }
-  if (keys.KeyS) {
+  if (keys.ArrowDown) {
     leftPaddle.position.z += paddleSpeed;
+  }
+  // if (keys.KeyW) {
+  //   leftPaddle.position.z -= paddleSpeed;
+  // }
+  // if (keys.KeyS) {
+  //   leftPaddle.position.z += paddleSpeed;
+  // }
+
+  // AI paddle movement
+  if (ball.position.z > rightPaddle.position.z) {
+    rightPaddle.position.z += aiPaddleSpeed;
+  } else if (ball.position.z < rightPaddle.position.z) {
+    rightPaddle.position.z -= aiPaddleSpeed;
   }
 
   // Clamp paddle position within board boundaries
